@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour
         if (_objectController == null)
         {
             _objectController = gameObject.AddComponent<ObjectController>();
-            _objectController.enabled = false;
+            _objectController.enabled = true;
         }
         Event3D.current.onObjectClicked += OutlineOn;
     }
