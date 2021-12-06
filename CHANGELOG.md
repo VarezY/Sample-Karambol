@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.75] - 2021-12-04
+### Added
+- Adding simple widget to Game
+- Simplifying State Machine
+
+### Updated
+- UI Element ingame
+
 ## [0.7] - 2021-11-25
 ### Added
 - ObjectController.cs for dragging object inside Karambol
