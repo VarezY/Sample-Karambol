@@ -8,10 +8,12 @@ public class CameraTouch : MonoBehaviour
     public GameObject _karambol;
     private DragAndRotate objectScript;
     private Manager3D manager3D;
+    private Camera _camera;
     void Start()
     {
         Debug.Log("Initialize Touch Object Script");
         objectScript = _karambol.GetComponent<DragAndRotate>();
+        _camera = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -20,7 +22,7 @@ public class CameraTouch : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit raycastHit;
 
             if (Physics.Raycast(ray, out raycastHit))
@@ -38,7 +40,7 @@ public class CameraTouch : MonoBehaviour
 #else
        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
-           Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+           Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit raycastHit;
 
             if (Physics.Raycast(ray, out raycastHit))

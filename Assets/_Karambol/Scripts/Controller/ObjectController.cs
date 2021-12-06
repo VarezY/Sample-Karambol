@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class ObjectController : MonoBehaviour
 {
-    private float dist;
     private bool dragging = false;
-    private Vector3 offset;
-    private Transform toDrag;
 
-    public TMP_Text debugText;
+    private TMP_Text debugText;
+    public Rigidbody _rigidbody;
+
+    public Transform batasKanan, batasKiri;
     [Range(0, 2)]
-    public float slideSpeed = 0.05f;
+    public float slideSpeed = 0.035f;
 
     private void Start()
     {
@@ -21,11 +21,25 @@ public class ObjectController : MonoBehaviour
         {
             debugText = GameObject.Find("Debug").GetComponent<TMP_Text>();
         }
+
+        if (batasKanan == null)
+        {
+            batasKanan = GameObject.Find("Batas Kanan").transform;
+        }
+
+        if (batasKiri == null)
+        {
+            batasKiri = GameObject.Find("Batas Kiri").transform;
+        }
+
+        _rigidbody = GetComponent<Rigidbody>();
+        Event3D.current.onShootPin += ShootPin;
     }
 
     void FixedUpdate () {
-        Vector3 v3;
- 
+        
+        #region DragPin Movement
+
         if (Input.touchCount != 1) {
             dragging = false; 
             return;
@@ -39,9 +53,6 @@ public class ObjectController : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(pos); 
             if(Physics.Raycast(ray, out hit) && (hit.collider.gameObject == this.gameObject))
             {
-                toDrag = hit.transform;
-
-                offset = new Vector3(toDrag.position.x, toDrag.position.y, transform.position.z);
                 dragging = true;
             }
         }
@@ -53,13 +64,21 @@ public class ObjectController : MonoBehaviour
         if (dragging && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)) {
             dragging = false;
         }
-        pos = transform.position;
-        debugText.text = transform.position.ToString();
 
-        // Clamping is still Brokern
-        pos.x =  Mathf.Clamp(transform.position.x, -2.0f, 2.0f);
-        transform.position = pos;
+        Vector3 localPos = transform.localPosition;
+        localPos.x = Mathf.Clamp(localPos.x, batasKiri.localPosition.x, batasKanan.localPosition.x);
+        transform.localPosition = localPos;
 
+        #endregion
         
+        
+        debugText.text = _rigidbody.velocity.ToString();
+
+    }
+
+    private void ShootPin()
+    {
+        Debug.Log("Shooting Pin");
+        _rigidbody.AddForce(-transform.up * 2000f);
     }
 }

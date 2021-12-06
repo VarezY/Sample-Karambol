@@ -11,17 +11,11 @@ public class PlayerManager : MonoBehaviour
     
     private void Start()
     {
-        if (_outline == null)
-        {
-            _outline = gameObject.AddComponent<Outline>();
-            _outline.enabled = false;
-        }
-        if (_objectController == null)
-        {
-            _objectController = gameObject.AddComponent<ObjectController>();
-            _objectController.enabled = true;
-        }
+        _outline = GetComponent<Outline>();
+        _objectController = GetComponent<ObjectController>();
+        
         Event3D.current.onObjectClicked += OutlineOn;
+        Event3D.current.onShootPin += ObjectControllOff;
     }
 
     private void OutlineOn(GameObject _gameObject)
@@ -37,4 +31,11 @@ public class PlayerManager : MonoBehaviour
             _outline.enabled = false;
         }
     }
+
+    private void ObjectControllOff()
+    {
+        _objectController.enabled = false;
+    }
+    
+    
 }

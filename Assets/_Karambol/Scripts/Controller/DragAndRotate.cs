@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -12,6 +14,13 @@ public class DragAndRotate : MonoBehaviour
 
     private float initialDistance;
     private Vector3 initialScale;
+
+    private void Start()
+    {
+        Event3D.current.onResetPosition += ResetPositionBoard;
+
+    }
+
     void Update()
     {
         if (isActive)
@@ -77,5 +86,10 @@ public class DragAndRotate : MonoBehaviour
                 }  
             }
         }
+    }
+    
+    private void ResetPositionBoard()
+    {
+        transform.DOLocalRotate(new Vector3(0f, 0, 0f), 0.8f);
     }
 }

@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Queen
+  - Blue
+  - Yellow
+  - Game
+  - BlueGoal
+  - RedGoal
+  - AR Camera
+  - Placeholder
   layers:
   - Default
   - TransparentFX
@@ -13,7 +21,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - ARDK_MockWorld
   - 
   - 
   - 
