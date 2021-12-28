@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Event3D : MonoBehaviour
@@ -45,6 +43,24 @@ public class Event3D : MonoBehaviour
         if (onScoring != null)
         {
             onScoring(_string);
+        }
+    }
+    
+    public event Action onChangePlayer1;
+    public void ChangePlayer1()
+    {
+        if (onChangePlayer1 != null)
+        {
+            onChangePlayer1();
+        }
+    }
+    
+    public event Action onChangePlayer2;
+    public void ChangePlayer2()
+    {
+        if (onChangePlayer2 != null)
+        {
+            onChangePlayer2();
         }
     }
 }

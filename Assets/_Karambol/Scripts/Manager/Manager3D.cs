@@ -12,6 +12,8 @@ public class Manager3D : MonoBehaviour
 
     public GameObject yellowPin, bluePin;
     public Button randomSpawn;
+
+    [SerializeField] private bool _isPinLaunched;
     private void Start()
     {
         shootButton.onClick.AddListener(() => Event3D.current.ShootPin());
@@ -36,4 +38,6 @@ public class Manager3D : MonoBehaviour
 
         }
     }
+    
+    
 }

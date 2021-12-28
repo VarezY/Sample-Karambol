@@ -15,12 +15,23 @@ public class ObjectController : MonoBehaviour
     [Range(0, 2)]
     public float slideSpeed = 0.035f;
 
+    Vector2 startPos, endPos, direction; // touch start position, touch end position, swipe direction
+    float touchTimeStart, touchTimeFinish, timeInterval; // to calculate swipe time to sontrol throw force in Z direction
+
+    [SerializeField]
+    float throwForceInXandY = 1f; // to control throw force in X and Y directions
+
+    [SerializeField]
+    float throwForceInZ = 50f;
+
+    public bool isInverted = false;
+    
     private void Start()
     {
-        if (debugText == null)
-        {
-            debugText = GameObject.Find("Debug").GetComponent<TMP_Text>();
-        }
+        // if (debugText == null)
+        // {
+        //     debugText = GameObject.Find("Debug").GetComponent<TMP_Text>();
+        // }
 
         if (batasKanan == null)
         {
@@ -32,7 +43,10 @@ public class ObjectController : MonoBehaviour
             batasKiri = GameObject.Find("Batas Kiri").transform;
         }
 
-        _rigidbody = GetComponent<Rigidbody>();
+        if (_rigidbody == null)
+        {
+            _rigidbody = GetComponent<Rigidbody>();
+        }
         Event3D.current.onShootPin += ShootPin;
     }
 
@@ -55,14 +69,43 @@ public class ObjectController : MonoBehaviour
             {
                 dragging = true;
             }
+            touchTimeStart = Time.time;
+            startPos = Input.GetTouch (0).position;
         }
         if (dragging && touch.phase == TouchPhase.Moved) {
-            transform.Translate(touch.deltaPosition.x * slideSpeed, 0f, 0f);
+            if (!isInverted)
+            {
+                transform.Translate(touch.deltaPosition.x * slideSpeed, 0f, 0f);
+            }
+            else
+            {
+                transform.Translate(-touch.deltaPosition.x * slideSpeed, 0f, 0f);
+
+            }
             
 
         }
         if (dragging && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)) {
             dragging = false;
+
+            // #region Swipe to Shoot
+            //
+            // touchTimeFinish = Time.time;
+            //
+            // // calculate swipe time interval 
+            // timeInterval = touchTimeFinish - touchTimeStart;
+            //
+            // // getting release finger position
+            // endPos = Input.GetTouch (0).position;
+            //
+            // // calculating swipe direction in 2D space
+            // direction = startPos - endPos;
+            //
+            // // add force to balls rigidbody in 3D space depending on swipe time, direction and throw forces
+            // _rigidbody.isKinematic = false;
+            // _rigidbody.AddForce (- direction.x * throwForceInXandY, - direction.y * throwForceInXandY, throwForceInZ / timeInterval);
+            //
+            // #endregion
         }
 
         Vector3 localPos = transform.localPosition;
@@ -72,7 +115,7 @@ public class ObjectController : MonoBehaviour
         #endregion
         
         
-        debugText.text = _rigidbody.velocity.ToString();
+        // debugText.text = _rigidbody.velocity.ToString();
 
     }
 

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "944413883537",
+    "firebase_url": "https://karambolar-b8007-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "karambolar-b8007",
+    "storage_bucket": "karambolar-b8007.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944413883537:android:e02f07236fc743c0845330",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.KarambolAR"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944413883537-gpjroqf79nl50o89nhmjhhjnmhirv6hs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIxIvQCEZvYZkkoYsEFgRe9lySvCp9cCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944413883537-gpjroqf79nl50o89nhmjhhjnmhirv6hs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

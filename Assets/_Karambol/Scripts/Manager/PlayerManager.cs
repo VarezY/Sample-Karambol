@@ -9,6 +9,9 @@ public class PlayerManager : MonoBehaviour
     private Outline _outline;
     private ObjectController _objectController;
     
+    public static string _currentState = "Player1";
+    public static bool PinMoving = false;
+    
     private void Start()
     {
         _outline = GetComponent<Outline>();

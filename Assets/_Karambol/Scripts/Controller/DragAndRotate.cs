@@ -90,6 +90,20 @@ public class DragAndRotate : MonoBehaviour
     
     private void ResetPositionBoard()
     {
-        transform.DOLocalRotate(new Vector3(0f, 0, 0f), 0.8f);
+        if (PlayerManager._currentState == "Player1")
+        {
+            transform.DOLocalRotate(new Vector3(0f, 0, 0f), 0.8f);
+
+        }
+        else if (PlayerManager._currentState == "Player2")
+        {
+            transform.DOLocalRotate(new Vector3(0f, 180, 0f), 0.8f);
+
+        }
+    }
+
+    private void OnDestroy()
+    {
+        Event3D.current.onResetPosition -= ResetPositionBoard;
     }
 }

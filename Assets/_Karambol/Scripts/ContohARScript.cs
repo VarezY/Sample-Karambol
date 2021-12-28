@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Niantic.ARDK.AR.Anchors;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class ContohARScript : MonoBehaviour
     public GameObject cube;
     public TMP_Text _Text;
     public GameObject _placholder;
+    public IARAnchor Anchor;
 
     private void Start()
     {
